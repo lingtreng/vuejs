@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <p>
+                {{message}}
+            </p>
+            <div class="cart">
+                <p>Giỏ hàng ({{cartNumber}})</p>
+            </div>
+        </div>
+        <section>
+            <div class="container ">
+                <div class="product">
+                    <div class="product__image"><img v-bind:src="getProduct.image" alt=""></div>
+                <div class="product__detail">
+                   <a v-bind:href="url" target="{{target}}">{{title}}</a>
+                    <p class="brand">Thương hiệu {{brand}}</p>
+                    <p class="quantity" v-if="getProduct.quantity > 0" >Còn lại {{getProduct.quantity}} sản phẩm</p>
+                    <p class="quantity" v-if="getProduct.quantity <= 0" style="background-color: brown;color: antiquewhite;">Hết hàng</p>
+                    <p>{{formatPriceDiscount}}</p>
+                    <div class="price__discount">
+                        <p class="price__discount-root">{{formatPrice}}</p>
+                        <p class="price__discount-value">{{formatDiscountPersent}}</p>
+                    </div>
+                    <div class="product__color">
+                        <p>Màu sắc</p>
+                        <div class="product__color-detail">
+                            <p>{{getProduct.textColor}}</p>
+                            <div class="product__color-images">
+                                <li 
+                                    v-for="(item,index) in listProductDetail "
+                                    v-bind:key="index"
+                                    v-bind:class="classActive(index)"
+                                    v-on:click="handleClickeColor($event,index)">
+                                    <img  v-bind:src="item.image"
+                                    v-bind:alt="item.textColor">
+                                </li>
+                                <!-- <li><img src="images/image2.jpg" alt=""></li>
+                                <li><img src="images/image3.jpg" alt=""></li> -->
+                            </div>
+                        </div>
+                    </div>
+                    <button v-on:click="handleAddToCart" >ADD TO CART</button>
+                </div>
+                <div class="product__desc">
+                    <li>Chất liệu: da cá sấu</li>
+                    <li>Thoát mồ hôi tốt</li>
+                    <li>Áo thun cổ tròn đi nắng bao đen</li>
+                    <li>Kết hợp da bò</li>
+                    <li>Chất liệu thun</li>
+                </div>
+                </div>
+                
+            </div>
+        </section>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="main.js"></script>
+</body>
+</html>
